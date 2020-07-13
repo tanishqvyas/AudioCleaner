@@ -40,10 +40,6 @@ class InputGenerator:
 
 		return audio_list
 
-	# Function to generate random noise audio
-	def generate_random_noise_audio(self, path, duration):
-		pass
-
 
 	# Function to generate noisy input data
 	def generate_noisy_input(self, sample_count=1):
@@ -74,7 +70,20 @@ class InputGenerator:
 
 if __name__ == '__main__':
 	
-	# test your functions here
-	pass
+
+	# Paths for respective data folders
+	clean_audio_path = os.path.join("data", "clean")
+	noise_audio_path = os.path.join("data", "noise")
+	input_audio_path = os.path.join("data", "input")
+
+
+	obj = InputGenerator(clean_audio_path, noise_audio_path, input_audio_path)
+
+	obj.generate_noisy_input()
+
+
+
+
+
 
 		

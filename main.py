@@ -13,3 +13,8 @@ input_audio_path = os.path.join("data", "input")
 obj = InputGenerator(clean_audio_path, noise_audio_path, input_audio_path)
 
 obj.generate_noisy_input()
+
+
+
+
+

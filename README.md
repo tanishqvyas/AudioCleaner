@@ -21,6 +21,8 @@
 |	|	|--- generate_noisy_input.py
 |	|
 |	|--- model
+|	|	|
+|	|	|--- train_model.py
 |	|
 |
 |--- main.py
