@@ -14,7 +14,4 @@ obj = InputGenerator(clean_audio_path, noise_audio_path, input_audio_path)
 
 obj.generate_noisy_input()
 
-
-
-
-
+# obj.play_audio(os.path.join(clean_audio_path, "name.wav"))

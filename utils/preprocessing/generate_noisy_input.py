@@ -6,8 +6,11 @@ This file aims at getting the clean input audio and mixing it with a noise audio
 """
 
 import os
+
+
 from scipy.io import wavfile
 from pydub import AudioSegment
+from pydub.playback import play
 
 
 
@@ -65,6 +68,11 @@ class InputGenerator:
 			combined.export(os.path.join(self.input_path, clean_audio_list[i]), format='wav')
 
 
+	# A function to play the audio
+	def play_audio(self, path):
+
+		sound = AudioSegment.from_file(path, format="wav")
+		play(sound)
 
 
 
