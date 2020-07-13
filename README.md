@@ -6,22 +6,22 @@
 +
 |
 |--- data
-|		|
-|		|--- clean
-|		|
-|		|--- noise
-|		|
-|		|--- input
+|	|
+|	|--- clean
+|	|
+|	|--- noise
+|	|
+|	|--- input
 |
 |
 |--- utils
-|		|
-|		|--- preprocessing
-|		|		|
-|		|		|--- generate_noisy_input.py
-|		|
-|		|--- model
-|		|
+|	|
+|	|--- preprocessing
+|	|	|
+|	|	|--- generate_noisy_input.py
+|	|
+|	|--- model
+|	|
 |
 |--- main.py
 |
