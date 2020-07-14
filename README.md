@@ -12,6 +12,8 @@
 |	|--- noise
 |	|
 |	|--- input
+|	|
+|	|--- plots
 |
 |
 |--- utils
