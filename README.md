@@ -25,7 +25,8 @@
 |	|--- model
 |	|	|
 |	|	|--- train_model.py
-|	|
+|	|	|
+|	|	|--- saved models
 |
 |--- main.py
 |
