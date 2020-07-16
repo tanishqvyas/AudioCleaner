@@ -8,12 +8,34 @@
 |--- data
 |	|
 |	|--- clean
+|	|	|
+|	|	|--- *.wav
 |	|
 |	|--- noise
+|	|	|
+|	|	|--- original uncropped noise audio
+|	|	|	|
+|	|	|	|--- *.mp3
+|	|	|
+|	|	|--- *.mp3
 |	|
 |	|--- input
+|	|	|
+|	|	|--- dev
+|	|	|	|
+|	|	|	|--- *.wav
+|	|	|
+|	|	|--- test
+|	|	|	|
+|	|	|	|--- *.wav
+|	|	|
+|	|	|--- train
+|	|	|	|
+|	|	|	|--- *.wav
 |	|
 |	|--- plots
+|	|	|
+|	|	|--- *.png
 |
 |
 |--- utils
