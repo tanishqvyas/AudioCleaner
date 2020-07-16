@@ -33,7 +33,7 @@ class InputGenerator:
 
 	# Function to fetch all the audio files from a folder
 	# Argument is the folder path
-	# Return a list of all the files
+	# Return a list of names of all the files (extension included)
 	def fetch_all_file_names(self, path):
 		
 		audio_list = []
@@ -49,6 +49,25 @@ class InputGenerator:
 			audio_list.append(filename)
 
 		return audio_list
+
+
+	def generate_noise_audio(self, duration):
+
+		pass
+
+	def get_audio_duration(self, path):
+
+		import wave
+		import contextlib
+
+		with contextlib.closing(wave.open(path,'r')) as f:
+			
+			frames = f.getnframes()
+			rate = f.getframerate()
+			duration = frames / float(rate)
+			print(duration)
+
+			return duration
 
 
 	# Function to generate noisy input data
@@ -75,11 +94,13 @@ class InputGenerator:
 			combined.export(os.path.join(self.input_path, clean_audio_list[i]), format='wav')
 
 
+
 	# A function to play the audio
 	def play_audio(self, path):
 
 		sound = AudioSegment.from_file(path, format="wav")
 		play(sound)
+
 
 	# A function to plot the audio
 	def plot_the_audio(self, folder_path, filename, wanna_save = False):
@@ -102,18 +123,10 @@ class InputGenerator:
 
 
 
+
 if __name__ == '__main__':
 	
-
-	# Paths for respective data folders
-	clean_audio_path = os.path.join("data", "clean")
-	noise_audio_path = os.path.join("data", "noise")
-	input_audio_path = os.path.join("data", "input")
-
-
-	obj = InputGenerator(clean_audio_path, noise_audio_path, input_audio_path)
-
-	obj.generate_noisy_input()
+	pass
 
 
 
