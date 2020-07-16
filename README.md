@@ -13,9 +13,9 @@
 |	|
 |	|--- noise
 |	|	|
-|	|	|--- original uncropped noise audio
-|	|	|	|
-|	|	|	|--- *.mp3
+|	|	|--- *.mp3
+|	|
+|	|--- original uncropped noise audio
 |	|	|
 |	|	|--- *.mp3
 |	|
