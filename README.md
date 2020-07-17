@@ -1,7 +1,7 @@
 **AUDIO CLEANER**
 
 
-**Folder Strutcure**
+**Folders Strutcure**
 ```
 +
 |
