@@ -6,8 +6,9 @@ This file aims at getting the clean input audio and mixing it with a noise audio
 """
 
 import os
+import math
 
-
+# Plotting the audio
 from matplotlib import pyplot as plt
 import numpy as np
 import wave
@@ -19,6 +20,10 @@ from pydub import AudioSegment
 from pydub.playback import play
 
 
+# Audio duration
+import wave
+import contextlib
+from mutagen.mp3 import MP3
 
 class InputGenerator:
 
@@ -51,14 +56,9 @@ class InputGenerator:
 		return audio_list
 
 
-	def generate_noise_audio(self, duration):
+	# Function to get the length of the audio file
+	def get_audio_duration_wav(self, path):
 
-		pass
-
-	def get_audio_duration(self, path):
-
-		import wave
-		import contextlib
 
 		with contextlib.closing(wave.open(path,'r')) as f:
 			
@@ -69,29 +69,59 @@ class InputGenerator:
 
 			return duration
 
+	# Function to get audio length for mp3 file
+	def get_audio_duration_mp3(self, path):
+
+		audio = MP3(path)
+		return audio.info.length
+
+
+	def get_noise_audio(self, duration, count):
+
+		pass
+
 
 	# Function to generate noisy input data
-	def generate_noisy_input(self, sample_count=1):
+	def generate_noisy_input(self, source_path, destination_path):
 		
+		print("GENERATING NOISY INPUT FOR ", source_path)
+
+
 		# List of final noisy input data
 		input_data_list = []
 
 		# Get all the clean audios
-		clean_audio_list = self.fetch_all_file_names(self.clean_path)
+		clean_audio_list = self.fetch_all_file_names(source_path)
+		num_of_clean_audios = len(clean_audio_list)
+		print("Clean audio fetching completed. There are : ", num_of_clean_audios, " audio files")
+
 
 		# Get all the noise audios
 		noise_audio_list = self.fetch_all_file_names(self.noise_path)
+		print("Noisy audio fetching completed")
+		num_of_noise_audio = len(noise_audio_list)
+		noise_index = 0
 
 
 		# Iterate over each individual audio and generate corresponding noisy input
-		for i in range(sample_count):
+		for i in range(num_of_clean_audios):
 			
-			original_audio = AudioSegment.from_file(os.path.join(self.clean_path, clean_audio_list[i]))
-			noise_audio    = AudioSegment.from_file(os.path.join(self.noise_path, noise_audio_list[i]))
+			print("Generating noisy audio for : ", clean_audio_list[i])
+
+			# Fetching the clean audio & it's duration
+			original_audio = AudioSegment.from_file(os.path.join(source_path, clean_audio_list[i]))
+			# clean_audio_duration = self.get_audio_duration(os.path.join(source_path, clean_audio_list[i]))
+			print("Fetched ", clean_audio_list[i])
+
+			# Fetching the noise audio
+			noise_audio    = AudioSegment.from_file(os.path.join(self.noise_path, noise_audio_list[noise_index]))
+			noise_index = (noise_index+1)%num_of_noise_audio
+
 
 			combined = original_audio.overlay(noise_audio)
 
-			combined.export(os.path.join(self.input_path, clean_audio_list[i]), format='wav')
+			combined.export(os.path.join(destination_path, clean_audio_list[i]), format='wav')
+			print("Noisy input generated succesfully for : ", clean_audio_list[i], "\n\n")
 
 
 
@@ -113,7 +143,7 @@ class InputGenerator:
 		plt.plot(time,data)
 		plt.xlabel('Time [s]')
 		plt.ylabel('Amplitude')
-		plt.title(filename)
+		plt.title(folder_path +" : "+filename)
 		fig = plt.gcf()
 		plt.show()
 
