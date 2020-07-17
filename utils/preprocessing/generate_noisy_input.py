@@ -7,6 +7,7 @@ This file aims at getting the clean input audio and mixing it with a noise audio
 
 import os
 import math
+import random
 
 # Plotting the audio
 from matplotlib import pyplot as plt
@@ -114,14 +115,20 @@ class InputGenerator:
 			print("Fetched ", clean_audio_list[i])
 
 			# Fetching the noise audio
-			noise_audio    = AudioSegment.from_file(os.path.join(self.noise_path, noise_audio_list[noise_index]))
+			noise_audio = AudioSegment.from_file(os.path.join(self.noise_path, noise_audio_list[noise_index]))
 			noise_index = (noise_index+1)%num_of_noise_audio
 
 
 			combined = original_audio.overlay(noise_audio)
 
+			if(i % 2 == 0):
+
+				noise2 = AudioSegment.from_file(os.path.join(self.noise_path, noise_audio_list[random.randint(0,num_of_noise_audio-1)]))
+				combined = combined.overlay(noise2)
+
 			combined.export(os.path.join(destination_path, clean_audio_list[i]), format='wav')
 			print("Noisy input generated succesfully for : ", clean_audio_list[i], "\n\n")
+
 
 
 
@@ -163,4 +170,3 @@ if __name__ == '__main__':
 
 
 
-		

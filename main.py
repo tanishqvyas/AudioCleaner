@@ -13,8 +13,8 @@ audio_plot_path  = os.path.join("data", "plots")
 
 obj = InputGenerator(clean_audio_path, noise_audio_path, input_audio_path, audio_plot_path)
 
-# obj.generate_noisy_input()
+obj.generate_noisy_input(os.path.join(clean_audio_path, "dev"), os.path.join(input_audio_path, "dev"))
 
-# obj.play_audio(os.path.join(clean_audio_path, "name.wav"))
+obj.generate_noisy_input(os.path.join(clean_audio_path, "test"), os.path.join(input_audio_path, "test"))
 
-obj.plot_the_audio(clean_audio_path, "name.wav")
+obj.generate_noisy_input(os.path.join(clean_audio_path, "train"), os.path.join(input_audio_path, "train"))
