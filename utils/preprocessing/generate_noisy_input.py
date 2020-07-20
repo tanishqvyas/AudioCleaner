@@ -26,6 +26,12 @@ import wave
 import contextlib
 from mutagen.mp3 import MP3
 
+# For dataset generation
+import numpy as np
+import soundfile as sf
+import csv
+
+
 class InputGenerator:
 
 	def __init__(self, clean_path, noise_path, input_path, plot_path, distortion = 0.1):
@@ -157,6 +163,40 @@ class InputGenerator:
 		if(wanna_save):
 
 			fig.savefig(os.path.join(self.plot_path, filename + ".png"))
+
+	@staticmethod
+	def strutil(num):
+		if(num <= 9):
+			return '0' + str(num)
+		else:
+			return str(num)
+
+	def generate_csv(self):
+		for i in range(1, 25):
+			data_clean, samplerate = sf.read('R:/Work/Flipkart/Dataset/CLEAN/clean/clean/sp'+ strutil(i)+'.wav')
+			data_dirty, samplerate = sf.read('R:/Work/Flipkart/Dataset/DIRTY/babble_0dB/0dB/sp' + strutil(i)+'_babble_sn0.wav')
+
+			with open('sound_x_train_big.csv', 'a', newline = '') as f:
+				writer = csv.writer(f)
+				np.savetxt(f, data_dirty, delimiter = ",")
+
+			with open('sound_y_train_big.csv', 'a', newline = '') as f:
+				writer = csv.writer(f)
+				np.savetxt(f, data_clean, delimiter = ",")
+
+
+
+		for i in range(25, 31):
+			data_clean, samplerate = sf.read('R:/Work/Flipkart/Dataset/CLEAN/clean/clean/sp'+ strutil(i)+'.wav')
+			data_dirty, samplerate = sf.read('R:/Work/Flipkart/Dataset/DIRTY/babble_0dB/0dB/sp' + strutil(i)+'_babble_sn0.wav')
+
+			with open('sound_x_test_big.csv', 'a', newline = '') as f:
+				writer = csv.writer(f)
+				np.savetxt(f, data_dirty, delimiter = ",")
+
+			with open('sound_y_test_big.csv', 'a', newline = '') as f:
+				writer = csv.writer(f)
+				np.savetxt(f, data_clean, delimiter = ",")
 
 
 

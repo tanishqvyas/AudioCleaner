@@ -1,7 +1,7 @@
 **AUDIO CLEANER**
 
 
-**Folders Strutcure**
+**Folders Structure**
 ```
 +
 |
